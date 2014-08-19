@@ -13,41 +13,27 @@ $app->get('/', function () use ($app) {
   return $app->sendFile('static/index.html');
 });
 
-$app->get('/hello/{name}', function ($name) use ($app) {
-  return new Response( "Hello, {$app->escape($name)}!");
-});
-
-// the .htaccess file should handle our static content in Production.
-// PHP-5.4's local server can handle static content as well (see README)
-// This alternate method for serving static files should not be needed:
-//$app->get('/css/{filename}', function ($filename) use ($app){
-//  if (!file_exists('static/css/' . $filename)) {
-//    $app->abort(404);
-//  }
-//  return $app->sendFile('static/css/' . $filename, 200, array('Content-Type' => 'text/css'));
-//});
-
-$app->get('/parks', function () use ($app) {
+$app->get('/toilets', function () use ($app) {
   $db_connection = getenv('OPENSHIFT_MONGODB_DB_URL') ? getenv('OPENSHIFT_MONGODB_DB_URL') . getenv('OPENSHIFT_APP_NAME') : "mongodb://localhost:27017/";
   $client = new MongoClient($db_connection);
-  $db = $client->selectDB(getenv('OPENSHIFT_APP_NAME'));
-  $parks = new MongoCollection($db, 'parks');
-  $result = $parks->find();
+  $db = getenv('OPENSHIFT_APP_NAME') ? $client->selectDB(getenv('OPENSHIFT_APP_NAME')) : $client->selectDB('findaloo');
+  $toilets = new MongoCollection($db, 'toilets');
+  $result = $toilets->find();
 
   $response = "[";
-  foreach ($result as $park){
-    $response .= json_encode($park);
+  foreach ($result as $toilet){
+    $response .= json_encode($toilet);
     if( $result->hasNext()){ $response .= ","; }
   }
   $response .= "]";
   return $app->json(json_decode($response));
 });
 
-$app->get('/parks/within', function () use ($app) {
+$app->get('/toilets/within', function () use ($app) {
   $db_connection = getenv('OPENSHIFT_MONGODB_DB_URL') ? getenv('OPENSHIFT_MONGODB_DB_URL') . getenv('OPENSHIFT_APP_NAME') : "mongodb://localhost:27017/";
   $client = new MongoClient($db_connection);
-  $db = $client->selectDB(getenv('OPENSHIFT_APP_NAME'));
-  $parks = new MongoCollection($db, 'parks');
+  $db = getenv('OPENSHIFT_APP_NAME') ? $client->selectDB(getenv('OPENSHIFT_APP_NAME')) : $client->selectDB('findaloo');
+  $toilets = new MongoCollection($db, 'toilets');
 
   #clean these input variables:
   $lat1 = floatval($app->escape($_GET['lat1']));
@@ -59,8 +45,8 @@ $app->get('/parks/within', function () use ($app) {
        is_float($lon1) && is_float($lon2))){
     $app->json(array("error"=>"lon1,lat1,lon2,lat2 must be numeric values"), 500);
   }else{
-    $result = $parks->find( 
-      array( 'pos' => 
+    $result = $toilets->find( 
+      array( 'position' =>
         array( '$within' => 
           array( '$box' =>
             array(
@@ -70,8 +56,8 @@ $app->get('/parks/within', function () use ($app) {
   }
   try{ 
     $response = "[";
-    foreach ($result as $park){
-      $response .= json_encode($park);
+    foreach ($result as $toilet){
+      $response .= json_encode($toilet);
       if( $result->hasNext()){ $response .= ","; }
     }
     $response .= "]";

@@ -5,7 +5,7 @@ $config = getenv('OPENSHIFT_MONGODB_DB_URL') . getenv('OPENSHIFT_APP_NAME');
 
 $client = new MongoClient($config);
 $db = $client->selectDB(getenv('OPENSHIFT_APP_NAME'));
-$parks = new MongoCollection($db, 'parks');
+$toilets = new MongoCollection($db, 'toilets');
 
-$result = $parks->ensureIndex(array('pos'=>"2d"));
+$result = $toilets->ensureIndex(array('position'=>"2d"));
 ?>
