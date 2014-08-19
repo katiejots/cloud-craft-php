@@ -34,8 +34,8 @@
   <script>
     var map = L.map('map').setView([-41.3, 174.8], 14);
     var markerLayerGroup = L.layerGroup().addTo(map);
-    L.tileLayer('http://{s}.tiles.mapbox.com/v3/mapbox.mapbox-warden/{z}/{x}/{y}.png', {
-      attribution: 'Map tiles by <a href="http://mapbox.com">MapBox Warden</a>. Data by <a href="https://koordinates.com/layer/2219-wellington-city-public-conveniences/">Wellington City Council</a>, under <a href="https://koordinates.com/license/attribution-3-0-new-zealand">CC BY 3.0 NZ</a>.',
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map tiles by <a href="http://openstreetmap.org">OpenStreetMap</a>. Data by <a href="https://koordinates.com/layer/2219-wellington-city-public-conveniences/">Wellington City Council</a>, under <a href="https://koordinates.com/license/attribution-3-0-new-zealand">CC BY 3.0 NZ</a>.',
       maxZoom: 18
     }).addTo(map);
 
