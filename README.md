@@ -9,7 +9,7 @@ Or [link to a web-based clone+deploy](https://openshift.redhat.com/app/console/a
 
     https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=php-5.4&cartridges%5B%5D=mongodb-2&initial_git_url=https%3A%2F%2Fgithub.com%2Fcodemiller%2Fcloud-craft.git
 
-A demo is available at: [http://findaloo-katiemiller.rhcloud.com/](http://findaloo-katiemiller.rhcloud.com/)
+A demo is available at: [http://findaloo-cloudcraft.rhcloud.com/](http://findaloo-cloudcraft.rhcloud.com/)
 
 ## Local Development
 
