@@ -47,7 +47,7 @@ $app->get('/toilets/within', function () use ($app) {
   }else{
     $result = $toilets->find( 
       array( 'position' =>
-        array( '$within' => 
+        array( '$geoWithin' => 
           array( '$box' =>
             array(
               array( $lon1, $lat1),
