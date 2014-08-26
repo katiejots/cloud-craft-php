@@ -57,7 +57,7 @@
                  '<div class="hours">Open: ' + toilet.properties.Open_hours + '</div>' +
                  '<div class="type">Type: ' + toilet.properties.Type + '</div>' +
                  '<div class="disabled">Disabled Access: ' + toilet.properties.Disabled + '</div>';
-        markerArray[i] = L.marker([toilet.position[1], toilet.position[0]]).bindPopup(info);
+        markerArray[i] = L.marker([toilet.geometry.coordinates[1], toilet.geometry.coordinates[0]]).bindPopup(info);
       }
  
       markerLayerGroup = L.layerGroup(markerArray).addTo(map);

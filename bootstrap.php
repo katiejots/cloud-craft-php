@@ -7,5 +7,5 @@ $client = new MongoClient($config);
 $db = $client->selectDB(getenv('OPENSHIFT_APP_NAME'));
 $toilets = new MongoCollection($db, 'toilets');
 
-$result = $toilets->ensureIndex(array('position'=>"2d"));
+$result = $toilets->ensureIndex(array('geometry.coordinates'=>"2dsphere"));
 ?>

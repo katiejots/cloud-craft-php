@@ -28,7 +28,7 @@ Projection: WGS 84
 - reprojected from NZGD2000 / New Zealand Transverse Mercator 2000 to WGS 84
 - converted by Koordinates to Shapefile on 18 Aug 2014
 - Katie Miller converted Shapefile to JSON on 18 Aug 2014
-- Katie Miller removed FeatureCollection wrapper and feature type from JSON data, and changed 'geometry.coordinates' to 'position' on 18 Aug 2014
+- Katie Miller removed FeatureCollection and feature wrapper from JSON data on 18 Aug 2014
 
 ------------------------------------------------------------------------
  LICENSE: Creative Commons Attribution 3.0 New Zealand

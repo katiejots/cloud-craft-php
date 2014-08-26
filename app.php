@@ -46,7 +46,7 @@ $app->get('/toilets/within', function () use ($app) {
     $app->json(array("error"=>"lon1,lat1,lon2,lat2 must be numeric values"), 500);
   }else{
     $result = $toilets->find( 
-      array( 'position' =>
+      array( 'geometry.coordinates' =>
         array( '$geoWithin' => 
           array( '$box' =>
             array(
